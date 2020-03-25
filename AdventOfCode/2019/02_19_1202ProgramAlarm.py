@@ -5,7 +5,7 @@ def getValueAt(program, no):
     return int(program[no])
 
 ##function to do the computation of the machine
-def intCode1():
+def intCode(x,y):
     ##TESTS
     ##program = [1,0,0,0,99]
     ##program = [1,1,1,4,99,5,6,0,99]
@@ -17,7 +17,10 @@ def intCode1():
 
     ##setup the basic instruction elements 
     opcodeList = [1,2,99]
-    instructionSize = 4 
+    instructionSize = 4
+
+    program[1] = x
+    program[2] = y
 
     ##loop through program
     for pc in range(0, len(program), instructionSize):
@@ -36,18 +39,30 @@ def intCode1():
             result = getValueAt(program, int(pc+3) )
 
             ##print values of instructions 
-            print("opcode: " + str(opcode))
+            ##print("opcode: " + str(opcode))
 
             ##do the instructions with the set opcodes
             ##add
             if (opcode == 1):
-                print("ADD")
+                ##print("ADD")
                 program[result] = program[operand1] + program[operand2] 
                
             ##mul
             elif (opcode == 2):
-                print("MUL")
+                ##print("MUL")
                 program[result] = program[operand1] * program[operand2]
 
+##Part1            
+#print(intCode(12,2))
+
+##Part2
+valueToFind = 19690720
+for noun in range(0,99):
+    for verb in range(0,99):
+        firstValue = intCode(noun,verb)[0]
+        if valueToFind == firstValue:
+            print("noun: " + str(noun))
+            print("verb: " + str(verb))
             
-print(intCode1())
+            a = (100 * noun) + verb
+            print("final value: " + str(a))
